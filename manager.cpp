@@ -7,51 +7,57 @@
 #include "fstream"
 
 void Manager::insert() {
-//    å¢åŠ ç”µå½±
+//    Ôö¼ÓµçÓ°
     while (1) {
         Manager movie;
-        cout << "è¾“å…¥åœºæ¬¡å·:";
+        l2:
+        movie.show();
+        cout << "ÊäÈë³¡´ÎºÅ:\n";
         cin >> movie.num;
-        char f[20] = ""; //å°†ä¸åŒçš„ç”µå½±åœºæ¬¡å’Œç›¸åº”çš„æ–‡ä»¶ç›¸å¯¹åº”
+        char f[20] = ""; //½«²»Í¬µÄµçÓ°³¡´ÎºÍÏàÓ¦µÄÎÄ¼şÏà¶ÔÓ¦
         f[0] = movie.num + '0';
-        strcat(f, ".dat"); //å°† f ä¿å­˜ä¸ºç›¸åº”çš„æ–‡ä»¶
-        fstream out(f, ios::out | ios::binary); //ç”µå½±ä¿¡æ¯è¾“å…¥
-        cout << "è¾“å…¥ç”µå½±æ”¾æ˜ çš„æ—¥æœŸ æœˆå’Œæ—¥ï¼ˆå¦‚ 1 1ï¼‰:";
+        strcat(f, ".dat"); //½« f ±£´æÎªÏàÓ¦µÄÎÄ¼ş
+        fstream out(f, ios::out | ios::binary); //µçÓ°ĞÅÏ¢ÊäÈë
+        if (!out.is_open()) {
+            cout << "´ò¿ªÊ§°Ü";
+            goto l2;
+        }
+        cout << "ÊäÈëµçÓ°·ÅÓ³µÄÈÕÆÚ ÔÂºÍÈÕ£¨Èç 1 1£©:";
         cin >> movie.month >> movie.day;
-        movie.hour = 6 + movie.num * 2;
-        cout << movie.hour;
-        cout << "è¾“å…¥ç”µå½±çš„åå­—ï¼ˆå¦‚ ç«å½±å¿è€…ï¼‰:";
+        movie.hour = (movie.num*17 +7)%12+10;
+//        cout << movie.hour;
+        cout << "ÊäÈëµçÓ°µÄÃû×Ö£¨Èç »ğÓ°ÈÌÕß£©:";
         cin >> movie.moviename;
-        cout << "è¾“å…¥ç¥¨ä»·ï¼ˆå¦‚ 5ï¼‰:";
+        cout << "ÊäÈëÆ±¼Û£¨Èç 5£©:";
         cin >> movie.price;
         out.write((char *) &movie, sizeof(movie));
-        cout << "å½•å…¥æˆåŠŸï¼ï¼ï¼" << endl << endl;
-        cout << "æ˜¯å¦ç»§ç»­å½•å…¥ï¼ˆy/nï¼‰ï¼š";
+        cout << "Â¼Èë³É¹¦£¡£¡£¡" << endl << endl;
+        cout << "ÊÇ·ñ¼ÌĞøÂ¼Èë£¨y/n£©£º";
         char b;
         cin >> b;
         if (b != 'y' && b != 'Y')break;
         out.close();
     }
-    cout << "å½•å…¥æˆåŠŸï¼ï¼ï¼" << endl;
-    system("pause");
+    cout << "Â¼Èë³É¹¦£¡£¡£¡" << endl;
+//    system("pause");
 
 }
 
-void Manager::show() { //æ˜¾ç¤ºæ‰€æœ‰ç”µå½±ä¿¡æ¯
+void Manager::show() { //ÏÔÊ¾ËùÓĞµçÓ°ĞÅÏ¢
     Manager movie;
-    cout << "æ‰€æœ‰çš„ç”µå½±ä¿¡æ¯æ˜¾ç¤ºå¦‚ä¸‹ï¼š" << endl;
-    cout.width(12);
-    cout << "åœºæ¬¡";
-    cout.width(12);
-    cout << "æ—¥æœŸ";
-    cout.width(14);
-    cout << "æ—¶é—´";
-    cout.width(12);
-    cout << "ç”µå½±åç§°";
-    cout.width(9);
-    cout << "ç¥¨ä»·";
-    cout.width(10);
-    cout << "ä½™ç¥¨\n";
+    cout << "ËùÓĞµÄµçÓ°ĞÅÏ¢ÏÔÊ¾ÈçÏÂ£º" << endl;
+    cout.width(15);
+    cout << "  ³¡´Î";
+    cout.width(15);
+    cout << "ÈÕÆÚ";
+    cout.width(15);
+    cout << "Ê±¼ä";
+    cout.width(15);
+    cout << "µçÓ°Ãû³Æ";
+    cout.width(15);
+    cout << "Æ±¼Û";
+    cout.width(15);
+    cout << "ÓàÆ±\n";
     for (int i = 0; i < 20; i++) {
         char f[20] = "";
         f[0] = i + '0';
@@ -62,76 +68,84 @@ void Manager::show() { //æ˜¾ç¤ºæ‰€æœ‰ç”µå½±ä¿¡æ¯
             fin.read((char *) &movie, sizeof(movie));
             cout << movie;
             fin.close();
-        } else remove(f); //åˆ é™¤æ²¡æœ‰å­˜å…¥ç”µå½±ä¿¡æ¯çš„æ–‡ä»¶
+        } else remove(f); //É¾³ıÃ»ÓĞ´æÈëµçÓ°ĞÅÏ¢µÄÎÄ¼ş
     }
     cout << endl << endl;
 }
 
-void Manager::change() { //æ”¹å˜ç”µå½±ä¿¡æ¯
+void Manager::change() { //¸Ä±äµçÓ°ĞÅÏ¢
     Manager movie;
-    movie.show();
-    l1:
-    cout << "è¾“å…¥ä½ è¦æ›´æ”¹çš„ç”µå½±åœºæ¬¡:";
-    int n;
-    cin >> n;
-    char f[20] = "";
-    f[0] = n + '0';
-    strcat(f, ".dat");
-    fstream out(f, ios::out | ios::binary);
-    if (!out.is_open()) {
-        cout << "æ‰“å¼€å¤±è´¥";
-        goto l1;
+    while(1){
+        movie.show();
+        l1:
+        cout << "ÇëÊäÈëÒª¸ü¸ÄµÄµçÓ°³¡´Î£¨ÈôÎŞ¸Ã³¡´ÎÔòÔö¼Ó¸Ã³¡´ÎµçÓ°£©:";
+        int n;
+        cin >> n;
+        char f[20] = "";
+        f[0] = n + '0';
+        strcat(f, ".dat");
+        fstream out(f, ios::out | ios::binary);
+        if (!out.is_open()) {
+            cout << "´ò¿ªÊ§°Ü";
+            goto l1;
+        }
+        movie.num = n; //ÊäÈëĞÂµÄµçÓ°³¡´ÎĞÅÏ¢
+        cout << "ÊäÈëµçÓ°·ÅÓ³µÄÈÕÆÚ ÔÂºÍÈÕ£¨Èç 3 17£©:";
+        cin >> movie.month >> movie.day;
+        movie.hour = (2 + movie.num * 17)%12+10;
+        cout << "ÊäÈëµçÓ°µÄÃû×Ö£¨Èç »ğÓ°ÈÌÕß£©:";
+        cin >> movie.moviename;
+        cout << "ÊäÈëÆ±¼Û£¨Èç 5£©:";
+        cin >> movie.price;
+        out.write((char *) &movie, sizeof(movie));
+        out.close();
+        cout << "¸ü¸Ä³É¹¦" << endl;
+        cout << "ÊÇ·ñ¼ÌĞø¸ü¸Ä£¨y/n£©£º";
+        char b;
+        cin >> b;
+        if (b != 'y' && b != 'Y')break;
+        out.close();
+//        system("pause");
     }
-    movie.num = n; //è¾“å…¥æ–°çš„ç”µå½±åœºæ¬¡ä¿¡æ¯
-    cout << "è¾“å…¥ç”µå½±æ”¾æ˜ çš„æ—¥æœŸ æœˆå’Œæ—¥ï¼ˆå¦‚ 3 17ï¼‰:";
-    cin >> movie.month >> movie.day;
-    movie.hour = 6 + movie.num * 2;
-    cout << "è¾“å…¥ç”µå½±çš„åå­—ï¼ˆå¦‚ ç«å½±å¿è€…ï¼‰:";
-    cin >> movie.moviename;
-    cout << "è¾“å…¥ç¥¨ä»·ï¼ˆå¦‚ 5ï¼‰:";
-    cin >> movie.price;
-    out.write((char *) &movie, sizeof(movie));
-    out.close();
-    cout << "æ›´æ”¹æˆåŠŸ" << endl;
-    system("pause");
+
 }
 
-void Manager::deletee() { //åˆ é™¤ç”µå½±ä¿¡æ¯
+void Manager::deletee() { //É¾³ıµçÓ°ĞÅÏ¢
     Manager movie;
     movie.show();
-    cout << "è¾“å…¥ä½ è¦åˆ é™¤çš„ç”µå½±åœºæ¬¡ï¼š";
+    cout << "ÊäÈëÄãÒªÉ¾³ıµÄµçÓ°³¡´Î£º";
     int n;
     cin >> n;
     char f[20] = "";
     f[0] = n + '0';
     strcat(f, ".dat");
-    remove(f); //ç›´æ¥åˆ é™¤ç›¸åº”çš„ä¿å­˜ç”µå½±çš„æ–‡ä»¶
-    cout << "åˆ é™¤æˆåŠŸ" << endl;
+    remove(f); //Ö±½ÓÉ¾³ıÏàÓ¦µÄ±£´æµçÓ°µÄÎÄ¼ş
+    cout << "É¾³ı³É¹¦" << endl;
     system("pause");
 }
 
-void Manager::find() { //æŸ¥æ‰¾ç”µå½±
+void Manager::find() { //²éÕÒµçÓ°
     Manager movie;
     int result = 0;
-    cout << "è¾“å…¥ä½ è¦æŸ¥æ‰¾çš„ç”µå½±åç§°ï¼š"; //é€šè¿‡ç”µå½±åæŸ¥æ‰¾ç›¸åº”ç”µå½±
+    cout << "ÊäÈëÄãÒª²éÕÒµÄµçÓ°Ãû³Æ£º"; //Í¨¹ıµçÓ°Ãû²éÕÒÏàÓ¦µçÓ°
     char tmpname[20] = "";
     cin >> tmpname;
-    cout << endl << "æŸ¥æ‰¾çš„ç»“æœï¼š" << endl;
+    cout << endl << "²éÕÒµÄ½á¹û£º" << endl;
     cout.width(12);
-    cout << "åœºæ¬¡";
+    cout << "³¡´Î";
     cout.width(12);
-    cout << "æ—¥æœŸ";
+    cout << "ÈÕÆÚ";
     cout.width(14);
-    cout << "æ—¶é—´";
+    cout << "Ê±¼ä";
     cout.width(12);
-    cout << "ç”µå½±åç§°";
+    cout << "µçÓ°Ãû³Æ";
     cout.width(9);
-    cout << "ç¥¨ä»·";
+    cout << "Æ±¼Û";
     cout.width(10);
-    cout << "ä½™ç¥¨\n";
-    for (int i = 0; i < 10; i++) { //åŒæ ·éå†æ–‡ä»¶å¾—åˆ°æŸ¥æ‰¾çš„ä¿¡æ¯
+    cout << "ÓàÆ±\n";
+    for (int i = 0; i < 10; i++) { //Í¬Ñù±éÀúÎÄ¼şµÃµ½²éÕÒµÄĞÅÏ¢
         char f[20] = "";
-        f[0] = i + '0';//æ ·ä¾‹åªæœ‰1-9ï¼Œä¸æ”¯æŒä¸¤ä½æ•°
+        f[0] = i + '0';//ÑùÀıÖ»ÓĞ1-9£¬²»Ö§³ÖÁ½Î»Êı
         strcat(f, ".dat");
         fstream in(f, ios::in | ios::binary);
         if (!in.is_open()) {
@@ -147,7 +161,13 @@ void Manager::find() { //æŸ¥æ‰¾ç”µå½±
         in.close();
     }
     if (result == 0)
-        cout << endl << "\t\t æœªæ‰¾åˆ°è¯¥ç”µå½±" << endl;
+        cout << endl << "\t\t Î´ÕÒµ½¸ÃµçÓ°" << endl;
     cout << endl;
     system("pause");
+}
+bool  Manager::pd(string s) {
+    if(s==passwd){
+        return 1;
+    }
+    return 0;
 }

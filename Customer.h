@@ -13,7 +13,7 @@ public:
     void buytickets();
 
     void refundtickets();
-    void show();
+
     friend ostream &operator<<(ostream &op, Customer &s) {
         int i, j = 0;
         op.width(10);
@@ -31,15 +31,22 @@ public:
         op << s.price;
         op.width(10);
         op << s.rest << endl;
-        for (j = 0; j < 10; j++) {
+        for (i = 0; i < 19; i++) {
             cout << '\t';
-            for (i = 0; i < 10; i++) {
-                if (s.map[j][i] != 0)
+            for (j = 0; j < 20; j++) {
+                if (s.map[i][j] == 0)
                     op << "[空闲]";
                 else
                     op << "[有人]";
             }
             cout << endl;
+        }
+        for (i = 0; i < 20; i++) {
+            if (s.map[19][i] == 0) {
+                op << "[空  闲]";
+            } else {
+                op << "[有  人]";
+            }
         }
         return op;
     }

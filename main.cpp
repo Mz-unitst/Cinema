@@ -4,17 +4,18 @@
 
 int main() {
     Mainwindow w;
+    Manager op;
     int iii = 1;
     while (iii) {
         w.welcome();
-        cout << "请输入1或2\n";
+        cout << "请输入1或2\n"<<endl;
         int choose;
         cin >> choose;
         if (choose == 1) {
             cout << "请输入管理员密码\n";
             string tmp;
             cin >> tmp;
-            if (tmp == "1") {
+            if (op.pd(tmp)) {
                 w.managerwindow();
             } else {
                 cout << "密码错误!\n";
@@ -24,7 +25,7 @@ int main() {
         } else {
             cout << "输入错误，请重新输入\n";
         }
-        system("pause");
+//        system("pause");
     }
     return 0;
 }

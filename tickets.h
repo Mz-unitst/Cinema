@@ -16,10 +16,10 @@ protected:
     char moviename[66];
     double price;
     int num;//场次
-    bool map[40][40];//座位
+    bool map[20][20];//座位
     int rest;//余票
     int month, day, hour;//开始时间
-    string minute;
+    char minute[4];
     //std::string minute="";
 };
 

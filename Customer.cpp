@@ -5,96 +5,73 @@
 #include "Customer.h"
 #include "cstring"
 #include "fstream"
+#include "manager.h"
 
-void Customer::show() { //æ˜¾ç¤ºæ‰€æœ‰ç”µå½±ä¿¡æ¯
-    Customer movie;
-    cout << "æ‰€æœ‰çš„ç”µå½±ä¿¡æ¯æ˜¾ç¤ºå¦‚ä¸‹ï¼š" << endl;
-    cout.width(12);
-    cout << "åœºæ¬¡";
-    cout.width(12);
-    cout << "æ—¥æœŸ";
-    cout.width(14);
-    cout << "æ—¶é—´";
-    cout.width(12);
-    cout << "ç”µå½±åç§°";
-    cout.width(9);
-    cout << "ç¥¨ä»·";
-    cout.width(10);
-    cout << "ä½™ç¥¨\n";
-    for (int i = 0; i < 20; i++) {
-        char f[20] = "";
-        f[0] = i + '0';
-        strcat(f, ".dat");
-        fstream fin(f, ios::in | ios::binary);
-
-        if (fin.is_open()) {
-            fin.read((char *) &movie, sizeof(movie));
-            cout << movie;
-            fin.close();
-        } else remove(f); //åˆ é™¤æ²¡æœ‰å­˜å…¥ç”µå½±ä¿¡æ¯çš„æ–‡ä»¶
-    }
-    cout << endl << endl;
-}
-
-void Customer::buytickets() { //è´­ç¥¨å‡½æ•°
+void Customer::buytickets() { //¹ºÆ±º¯Êı
     Customer cus;
+    Manager tmp;
     char f[20] = "";
-    while (1) { //å¾ªç¯åˆ¤æ–­ç”µå½±æ˜¯å¦è¿‡æ—¶
-        time_t systime; //è·å–ç³»ç»Ÿæ—¶é—´çš„ä¸€äº›æ ¼å¼
+    while (1) { //Ñ­»·ÅĞ¶ÏµçÓ°ÊÇ·ñ¹ıÊ±
+        time_t systime; //»ñÈ¡ÏµÍ³Ê±¼äµÄÒ»Ğ©¸ñÊ½
         struct tm *timeinfo;
         time(&systime);
         timeinfo = localtime(&systime);
-        cus.show(); //ç”¨æ¥æ˜¾ç¤ºæ‰€æœ‰çš„ç”µå½±åœºæ¬¡ä¿¡æ¯
-        cout << "è¾“å…¥ä½ è¦ä¹°çš„åœºæ¬¡ï¼ˆå¦‚ 5ï¼‰ï¼š";
+        tmp.show();
+        cout << "ÊäÈëÄãÒªÂòµÄ³¡´Î£¨Èç 5£©£º";
         int n;
         cin >> n;
         char f1[10] = "";
-        int a, b; //èµ‹ä»¥ç›¸åº”çš„æƒå€¼ï¼Œä¾¿äºæ¯”è¾ƒç³»ç»Ÿæ—¶é—´å’Œç”µå½±æ—¶é—´çš„å¤§å°
+        int a, b; //¸³ÒÔÏàÓ¦µÄÈ¨Öµ£¬±ãÓÚ±È½ÏÏµÍ³Ê±¼äºÍµçÓ°Ê±¼äµÄ´óĞ¡
         f1[0] = n + '0';
         strcat(f1, ".dat");
         fstream in(f1, ios::in | ios::binary);
         in.read((char *) &cus, sizeof(cus));
-        in.close(); //å°†æ—¶é—´æ¯”è¾ƒè½¬æ¢æˆæ•°å€¼æ¯”è¾ƒ
-        int curtime = (timeinfo->tm_mon + 1) * 1000 + timeinfo->tm_mday * 24 + timeinfo->tm_hour; //ç»™ç³»ç»Ÿæ—¶é—´èµ‹æƒå€¼
+        in.close(); //½«Ê±¼ä±È½Ï×ª»»³ÉÊıÖµ±È½Ï
+        int curtime = (timeinfo->tm_mon + 1) * 1000 + timeinfo->tm_mday * 24 + timeinfo->tm_hour; //¸øÏµÍ³Ê±¼ä¸³È¨Öµ
         int movietime = cus.month * 1000 + cus.day * 24 + cus.hour;
         if (curtime < movietime) {
             strcpy(f, f1);
             break;
-        } //å°†æ–‡ä»¶ f1 çš„åå­—å¤åˆ¶ç»™ fï¼Œå¯ä»¥é‡æ–°æ‰“å¼€
-        cout << "\n è¯¥å½±ç‰‡å·²ç»æ’­æ”¾ï¼Œè¯·é‡æ–°é€‰æ‹©\n\n";
+        } //½«ÎÄ¼ş f1 µÄÃû×Ö¸´ÖÆ¸ø f£¬¿ÉÒÔÖØĞÂ´ò¿ª
+        cout << "\n ¸ÃÓ°Æ¬ÒÑ¾­²¥·Å£¬ÇëÖØĞÂÑ¡Ôñ\n\n";
     }
-    cout << "å½“å‰åœºæ¬¡çš„è®¢ç¥¨æƒ…å†µï¼š" << endl;
-    cout << cus; //è¾“å‡ºå½“å‰çš„è®¢ç¥¨æƒ…å†µï¼Œå“ªä¸ªåº§ä½æœ‰äººï¼Œé‚£ä¸ªåº§ä½æ²¡äºº
-    cout << "è¾“å…¥ä½ æƒ³è¦çš„åº§ä½ï¼ˆå¦‚ 3 5ï¼‰ï¼š";
+    cout << "µ±Ç°³¡´ÎµÄ¶©Æ±Çé¿ö£º" << endl;
+    cout << cus; //Êä³öµ±Ç°µÄ¶©Æ±Çé¿ö£¬ÄÄ¸ö×ùÎ»ÓĞÈË£¬ÄÇ¸ö×ùÎ»Ã»ÈË
+    cout << "ÊäÈëÄãÏëÒªµÄ×ùÎ»£¨Èç 3 5£©£º";
     int i, j = 0;
     cin >> i >> j;
-    while (cus.map[i - 1][j - 1] == 1 || (i == 20 && cus.map[i - 1][j] == 1)) { //åˆ¤æ–­åº§ä½æ˜¯å¦å·²ç»è¢«è´­ä¹°
-        cout << "æ‚¨è¾“å…¥çš„åº§ä½å·²è¢«è´­ä¹°ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << endl;
-        cout << "è¾“å…¥ä½ æƒ³è¦çš„åº§ä½ï¼ˆå¦‚ 3 5ï¼‰ï¼š";
+    while (cus.map[i - 1][j - 1] == 1 || (i == 20 && cus.map[i - 1][j] == 1)) { //ÅĞ¶Ï×ùÎ»ÊÇ·ñÒÑ¾­±»¹ºÂò
+        cout << "ÄúÊäÈëµÄ×ùÎ»ÒÑ±»¹ºÂò£¬ÇëÖØĞÂÊäÈë£¡" << endl;
+        cout << "ÊäÈëÄãÏëÒªµÄ×ùÎ»£¨Èç 3 5£©£º";
         cin >> i >> j;
     }
     if (i == 20) {
-        cout << "æ‚¨é€‰æ‹©çš„æ˜¯æƒ…ä¾£åº§ï¼Œå”®ä»·ä¸º" << cus.price * 2 << "å…ƒ";
+        cout << "ÄúÑ¡ÔñµÄÊÇÇéÂÂ×ù£¬ÊÛ¼ÛÎª" << cus.price * 2 << "Ôª";
         cus.map[i - 1][j - 1] = 1;
-        cus.map[i - 1][j] = 1;
+        if(j%2==0){
+            cus.map[i - 1][j-2] = 1;
+        } else{
+            cus.map[i - 1][j] = 1;
+        }
+
         cus.rest -= 2;
     } else {
-        cout << "å”®ä»·ä¸º" << cus.price << "å…ƒ";
+        cout << "ÊÛ¼ÛÎª" << cus.price << "Ôª";
         cus.map[i - 1][j - 1] = 1;
         --cus.rest;
     }
     fstream out(f, ios::out | ios::binary);
-    out.write((char *) &cus, sizeof(cus)); //å°†å·²ç»æ›´æ”¹çš„ä¿¡æ¯é‡æ–°ä¿å­˜åˆ°æ–‡ä»¶ä¸­
+    out.write((char *) &cus, sizeof(cus)); //½«ÒÑ¾­¸ü¸ÄµÄĞÅÏ¢ÖØĞÂ±£´æµ½ÎÄ¼şÖĞ
     out.close();
-    cout << "è´­ç¥¨æˆåŠŸ" << endl;
+    cout << "¹ºÆ±³É¹¦" << endl;
     system("pause");
 }
 
 
 void Customer::refundtickets() {
     Customer cus;
-    cout << "è¾“å…¥ä½ æƒ³è¦é€€ç¥¨çš„åœºæ¬¡ï¼ˆå¦‚ 2ï¼‰ï¼š";
-    int n; //è¾“å…¥é€€ç¥¨çš„åœºæ¬¡
+    cout << "ÊäÈëÄãÏëÒªÍËÆ±µÄ³¡´Î£¨Èç 2£©£º";
+    int n; //ÊäÈëÍËÆ±µÄ³¡´Î
     cin >> n;
     char f[20] = "";
     f[0] = n + '0';
@@ -102,28 +79,29 @@ void Customer::refundtickets() {
     fstream in(f, ios::in | ios::binary);
     in.read((char *) &cus, sizeof(cus));
     in.close();
-    cout << "è¾“å…¥ä½ é€€ç¥¨çš„åº§ä½ï¼ˆå¦‚ 3 5ï¼‰ï¼š";
-    int i, j = 0; //é€€ç¥¨çš„åº§ä½
+    cout << "ÊäÈëÄãÍËÆ±µÄ×ùÎ»£¨Èç 3 5£©£º";
+    int i, j = 0; //ÍËÆ±µÄ×ùÎ»
     cin >> i >> j;
-    while (cus.map[i - 1][j - 1] != 0) { //åˆ¤æ–­é€€ç¥¨çš„åº§ä½æ˜¯å¦è¢«è´­ç¥¨
-        cout << "æ‚¨è¾“å…¥çš„åº§ä½æœªè¢«è´­ä¹°ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << endl;
-        cout << "è¾“å…¥ä½ é€€ç¥¨çš„åº§ä½ï¼ˆå¦‚ 3 5ï¼‰ï¼š";
+    while (cus.map[i - 1][j - 1] != 0) { //ÅĞ¶ÏÍËÆ±µÄ×ùÎ»ÊÇ·ñ±»¹ºÆ±
+        cout << "ÄúÊäÈëµÄ×ùÎ»Î´±»¹ºÂò£¬ÇëÖØĞÂÊäÈë£¡" << endl;
+        cout << "ÊäÈëÄãÍËÆ±µÄ×ùÎ»£¨Èç 3 5£©£º";
         cin >> i >> j;
     }
     cout << ".\n.\n.\n";
     if (i == 20) {
+        if(j%2==0)j--;
         cus.map[i - 1][j - 1] = 0;
         cus.map[i - 1][j] = 0;
         cus.rest += 2;
-        cout << "é€€ç»™æ‚¨" << 2 * cus.price << "å…ƒ";
+        cout << "ÍË¸øÄú" << 2 * cus.price << "Ôª";
     } else {
         cus.map[i - 1][j - 1] = 0;
         ++cus.rest;
-        cout << "é€€ç»™æ‚¨" << cus.price << "å…ƒ";
+        cout << "ÍË¸øÄú" << cus.price << "Ôª";
     }
     fstream out(f, ios::out | ios::binary);
     out.write((char *) &cus, sizeof(cus));
     out.close();
-    cout << "é€€ç¥¨æˆåŠŸ" << endl;
+    cout << "ÍËÆ±³É¹¦" << endl;
     system("pause");
 }

@@ -23,7 +23,7 @@ void Mainwindow::managerwindow() {
     while (1) {
         Manager admin;
         cout << "\t\t\t------------------------------\n";
-        cout << "\t\t\t ******1.电影录入******\n";
+        cout << "\t\t\t ******1.增加电影******\n";
         cout << "\t\t\t ******2.显示影片******\n";
         cout << "\t\t\t ******3.修改影片******\n";
         cout << "\t\t\t ******4.删除影片******\n";
@@ -35,10 +35,11 @@ void Mainwindow::managerwindow() {
         cin >> choose;
         switch (choose) {
             case 1:
-                admin.insert();
+                admin.change();
                 break; //电影录入
             case 2:
                 admin.show();
+                system("pause");
                 break; //影片显示
             case 3:
                 admin.change();
@@ -55,10 +56,10 @@ void Mainwindow::managerwindow() {
                 cout << "输入错误！";
                 break;
         }
-        if (choose == 6)break;
+        if(choose==6)break;
     }
     cout << "已退出！！" << endl;
-    system("pause");
+//    system("pause");
 }
 
 void Mainwindow::customerwindow() {
@@ -86,7 +87,7 @@ void Mainwindow::customerwindow() {
                 cout << "输入错误！";
                 break;
         }
-        if (choose == 3)break;
+        if(choose==3) break;
     }
     cout << "已退出！！！" << endl;
     system("pause");
