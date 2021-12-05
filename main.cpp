@@ -5,8 +5,7 @@
 int main() {
     Mainwindow w;
     Manager op;
-    int iii = 1;
-    while (iii) {
+    while (1) {
         w.welcome();
         cout << "ÇëÊäÈë1»ò2\n" << endl;
         int choose;
