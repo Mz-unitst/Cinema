@@ -12,7 +12,8 @@ void Mainwindow::welcome() {
     time(&systime);
     timeinfo = localtime(&systime);
     cout << endl << endl << endl;
-    cout << "\t\t\t\t 北京时间：" << timeinfo->tm_hour << ":" << timeinfo->tm_min << endl;
+
+    cout << "\t\t\t\t当前时间：" <<asctime(timeinfo)<<endl;
     cout << "\t\t\t\t计科影院欢迎您\n\n\n";
     cout << "\t\t\t**********1.管理模块**********\n\n";
     cout << "\t\t\t**********2.售票模块**********\n\n";
