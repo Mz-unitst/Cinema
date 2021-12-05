@@ -6,54 +6,6 @@
 #include "string.h"
 #include "fstream"
 
-void Manager::insert() {
-//    增加电影
-    while (1) {
-        Manager movie;
-        l2:
-        movie.show();
-        cout << "输入场次号:\n";
-        cin >> movie.num;
-        char f[20] = ""; //将不同的电影场次和相应的文件相对应
-        int n = movie.num;
-        f[0] = movie.num + '0';
-        int tmp[20];
-        int k = 0;
-        while (n) {
-            tmp[k] = (n % 10);
-            ++k;
-            n /= 10;
-        }
-        for (int i = 0; i < k; i++) {
-            f[i] = '0' + tmp[k - i - 1];
-        }
-        strcat(f, ".dat"); //将 f 保存为相应的文件
-        fstream out(f, ios::out | ios::binary); //电影信息输入
-        if (!out.is_open()) {
-            cout << "打开失败";
-            goto l2;
-        }
-        cout << "输入电影放映的日期 月和日（如 1 1）:";
-        cin >> movie.month >> movie.day;
-        movie.hour = (movie.num * 17 + 7) % 12 + 10;
-//        cout << movie.hour;
-        cout << "输入电影的名字（如 火影忍者）:";
-        cin >> movie.moviename;
-        cout << "输入票价（如 5）:";
-        cin >> movie.price;
-        out.write((char *) &movie, sizeof(movie));
-        cout << "录入成功！！！" << endl << endl;
-        cout << "是否继续录入（y/n）：";
-        char b;
-        cin >> b;
-        if (b != 'y' && b != 'Y')break;
-        out.close();
-    }
-    cout << "录入成功！！！" << endl;
-//    system("pause");
-
-}
-
 void Manager::show() { //显示所有电影信息
     Manager movie;
     cout << "所有的电影信息显示如下：" << endl;
@@ -128,7 +80,7 @@ void Manager::change() { //改变电影信息
             cin >> movie.month >> movie.day;
         }
 
-        movie.hour = (2 + movie.num * 17) % 12 + 10;
+        movie.hour = (2 + movie.num * 27) % 16 + 8;
         cout << "输入电影的名字（如 火影忍者）:";
         cin >> movie.moviename;
         cout << "输入票价（如 5）:";

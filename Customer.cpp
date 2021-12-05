@@ -14,7 +14,7 @@ void Customer::buytickets() { //购票函数
     int n;
     while (1) { //循环判断电影是否过时
         time_t systime; //获取系统时间的一些格式
-        struct tm *timeinfo;s
+        struct tm *timeinfo;
         time(&systime);
         timeinfo = localtime(&systime);
         tmp.show();
