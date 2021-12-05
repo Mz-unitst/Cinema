@@ -80,7 +80,7 @@ void Manager::change() { //改变电影信息
             cin >> movie.month >> movie.day;
         }
 
-        movie.hour = (2 + movie.num * 27) % 16 + 8;
+        movie.hour = (2 + movie.num * 27) % 16 + 8;//8-24
         cout << "输入电影的名字（如 火影忍者）:";
         cin >> movie.moviename;
         cout << "输入票价（如 5）:";
