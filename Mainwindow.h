@@ -9,7 +9,9 @@
 class Mainwindow {
 public:
     void welcome();
+
     void managerwindow();
+
     void customerwindow();
 };
 

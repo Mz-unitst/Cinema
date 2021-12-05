@@ -56,7 +56,7 @@ void Mainwindow::managerwindow() {
                 cout << "输入错误！";
                 break;
         }
-        if(choose==6)break;
+        if (choose == 6)break;
     }
     cout << "已退出！！" << endl;
 //    system("pause");
@@ -87,7 +87,7 @@ void Mainwindow::customerwindow() {
                 cout << "输入错误！";
                 break;
         }
-        if(choose==3) break;
+        if (choose == 3) break;
     }
     cout << "已退出！！！" << endl;
     system("pause");

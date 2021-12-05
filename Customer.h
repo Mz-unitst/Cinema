@@ -8,7 +8,7 @@
 #include "tickets.h"
 
 class Customer : public Tickets {
-//    é¡¾å®¢ç±»ï¼Œè´­ç¥¨é€€ç¥¨
+//    ¹Ë¿ÍÀà£¬¹ºÆ±ÍËÆ±
 public:
     void buytickets();
 
@@ -31,23 +31,25 @@ public:
         op << s.price;
         op.width(10);
         op << s.rest << endl;
-        for (i = 0; i < 19; i++) {
-            cout << '\t';
-            for (j = 0; j < 20; j++) {
-                if (s.map[i][j] == 0)
-                    op << "[ç©ºé—²]";
-                else
-                    op << "[æœ‰äºº]";
-            }
-            cout << endl;
-        }
-        for (i = 0; i < 20; i++) {
-            if (s.map[19][i] == 0) {
-                op << "[ç©º  é—²]";
-            } else {
-                op << "[æœ‰  äºº]";
-            }
-        }
+//        for (i = 0; i < 9; i++) {
+//            cout << '\t';
+//            for (j = 0; j < 10; j++) {
+//                if (s.map[i][j] == 0)
+//                    op << "[¿ÕÏÐ]";
+//                else
+//                    op << "[ÓÐÈË]";
+//            }
+//            cout << endl;
+//        }
+//        cout<<"\t";
+//        for (i = 0; i < 5; i++) {
+//            op.width(11);
+//            if (s.map[9][i*2] == 0) {
+//                op << "[¿Õ    ÏÐ]";
+//            } else {
+//                op << "[ÓÐ    ÈË]";
+//            }
+//        }
         return op;
     }
 

@@ -14,10 +14,11 @@ class Manager : public Tickets {
     //管理员类
 
 public:
-    string passwd="1";
+    string passwd = "1";
+
     Manager() {
-        rest = 400;
-        strcpy(minute,":00");
+        rest = 100;
+        strcpy(minute, ":00");
     }
 
     void insert();
@@ -31,6 +32,8 @@ public:
     void deletee();
 
     bool pd(string s);
+
+    bool checkday(int m, int d);
 
     friend ostream &operator<<(ostream &op, Manager &s) {
         //输出电影s的信息

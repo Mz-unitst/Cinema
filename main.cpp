@@ -8,7 +8,7 @@ int main() {
     int iii = 1;
     while (iii) {
         w.welcome();
-        cout << "请输入1或2\n"<<endl;
+        cout << "请输入1或2\n" << endl;
         int choose;
         cin >> choose;
         if (choose == 1) {
