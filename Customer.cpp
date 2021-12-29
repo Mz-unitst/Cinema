@@ -48,6 +48,7 @@ void Customer::buytickets() { //购票函数
             break;
         } //将文件 f1 的名字复制给 f，可以重新打开
         cout << "\n 该影片已经播放，请重新选择\n\n";
+        system("pause");
     }
     cout << "当前场次的订票情况：" << endl;
     cout << cus << endl; //输出当前的订票情况，哪个座位有人，那个座位没人

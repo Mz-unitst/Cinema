@@ -5,9 +5,9 @@
 #include "manager.h"
 #include "string.h"
 #include "fstream"
-
+Manager movie;
 void Manager::show() { //显示所有电影信息
-    Manager movie;
+//    Manager *movie=new Manager;
     cout << "所有的电影信息显示如下：" << endl;
     cout.width(15);
     cout << "  场次";
@@ -47,7 +47,7 @@ void Manager::show() { //显示所有电影信息
 }
 
 void Manager::change() { //改变电影信息
-    Manager movie;
+//    Manager movie;
     while (1) {
         movie.show();
         l1:
@@ -99,7 +99,7 @@ void Manager::change() { //改变电影信息
 }
 
 void Manager::deletee() { //删除电影信息
-    Manager movie;
+//    Manager movie;
     movie.show();
     cout << "输入你要删除的电影场次：";
     int n;
@@ -122,7 +122,9 @@ void Manager::deletee() { //删除电影信息
 }
 
 void Manager::find() { //查找电影
-    Manager movie;
+//    Manager *movie=new Manager;
+//    Manager *mm=new Manager;
+//    delete(mm);
     int result = 0;
     cout << "输入你要查找的电影名称："; //通过电影名查找相应电影
     char tmpname[20] = "";
